@@ -1,9 +1,16 @@
-import 'react'
+import "react";
+import HeaderDisplay from "../components/custom/HeaderDisplay";
+import FilterMenu from "../components/custom/FilterMenu";
+import ProductList from "../components/custom/ProductList";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <HeaderDisplay />
+      <FilterMenu />
+      <ProductList />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
