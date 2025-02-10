@@ -2,9 +2,7 @@
 import "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
-import Navbar from "./components/custom/Navbar";
 import { ThemeProvider } from "@/components/provider/theme-provider";
-import Footer from "./components/custom/Footer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Product from "./pages/Product";
@@ -19,6 +17,8 @@ import CreateProducts from "./components/custom/CreateProducts";
 import Orders from "./components/custom/Orders";
 import Analytics from "./components/custom/Analytics";
 import Settings from "./components/custom/Settings";
+import { Provider } from "react-redux";
+import {store} from "./redux/store";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -86,7 +86,9 @@ const App = () => {
   return (
     <>
       <ThemeProvider>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </ThemeProvider>
       {/* <h1 className="text-3xl font-bold underline">Hello world!</h1> */}
     </>
