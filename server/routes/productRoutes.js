@@ -20,8 +20,8 @@ router.post(
 );
 router.put("/update-product/:id", verifyToken, updateProduct);
 router.delete("/delete-product", verifyToken, deleteProduct);
-router.get("/get-product", getProducts);
+router.get("/get-products", getProducts);
 router.get("/get-product-by-name/:name", getProductByName);
-router.put("/blackList-product/:idt", verifyToken, blacklistedProduct);
+router.put("/blacklist-product/:id", verifyToken, blacklistedProduct);
 router.put("/remove-from-blacklist/:id", verifyToken, removeFromBlacklist);
 module.exports = router;

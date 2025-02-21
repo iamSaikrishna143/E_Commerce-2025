@@ -9,19 +9,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserLogout } from "../../redux/slices/authSlice";
 
-const LogoutToggle = () => {
+const LogoutToggle = ({ user }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="cursor-pointer">
             {/* <AvatarImage src="https://github.com/shadcn.png" /> */}
-            <AvatarFallback className="text-xl">SA</AvatarFallback>
+            <AvatarFallback className="text-xl">
+              {user?.name?.charAt(0).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="center">
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => dispatch(setUserLogout())}>
+            Logout
+          </DropdownMenuItem>
           <Link to="/orders">
             <DropdownMenuItem>My Orders</DropdownMenuItem>
           </Link>

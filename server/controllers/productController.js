@@ -12,7 +12,7 @@ const createProduct = async (req, res) => {
   try {
     const { name, price, description, stock, colors, category } = req.body;
     const uploadedImages = [];
-    for (const file of req.files) {
+    for (const file in req.files) {
       const result = await cloudinary.uploader.upload(req.files[file].path, {
         folder: "products",
       });
@@ -105,7 +105,7 @@ const getProducts = async (req, res) => {
   try {
     let { page, limit, category, price, search } = req.query;
     page = parseInt(page) || 1;
-    limit = parseInt(limit) || 10;
+    limit = parseInt(limit) || 9;
     let query = {};
     if (category) {
       query.category = category.charAt(0).toUpperCase() + category.slice(1);
@@ -123,8 +123,8 @@ const getProducts = async (req, res) => {
       .limit(limit);
     let newProductsArray = [];
     products.forEach((product) => {
-      const productObj = products.toObject(product);
-      productObj.image = productObj.images[0].url;
+      const productObj = product.toObject();
+      productObj.image = productObj.images[0];
       delete productObj.images;
       newProductsArray.push(productObj);
     });

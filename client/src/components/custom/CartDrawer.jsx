@@ -1,7 +1,7 @@
 import "react";
 import {
   Drawer,
-//   DrawerClose,
+  //   DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -12,15 +12,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useSelector } from "react-redux";
 
 const CartDrawer = () => {
-//   let cartItems = [
-//     { id: 1, name: "Product 1", price: 100, quantity: 2 },
-//     { id: 2, name: "Product 2", price: 200, quantity: 2 },
-//     { id: 3, name: "Product 3", price: 300, quantity: 2 },
-//   ];
-  const totalQuantity = 5;
-  const totalPrice = 5;
+
+  const { cartItems, totalQuantity, totalPrice } = useSelector(
+    (state) => state.cart
+  );
 
   return (
     <>
@@ -42,6 +40,14 @@ const CartDrawer = () => {
               Total Items : {totalQuantity}, Total Price: ₹ {totalPrice}
             </DrawerDescription>
           </DrawerHeader>
+          <div className="flex flex-col sm:flow-row justify-start gap-3 h-[70vh] overflow-y-scroll sm:overflow-y-scroll sm:h-auto mx-3">
+            {/* {
+              cartItems.length ===0 ? <h2 className="text-primary text-3xl">Nothing To Show, Please Add some products</h2>:
+              cartItems.map((item, index) => (
+
+              ))
+            } */}
+          </div>
           <DrawerFooter>
             <Button>Checkout</Button>
           </DrawerFooter>

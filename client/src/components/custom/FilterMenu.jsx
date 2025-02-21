@@ -6,8 +6,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setProducts } from "../../redux/slices/productSlice";
 
 const categoryData = {
   trigger: "Category",
@@ -22,6 +25,19 @@ const FilterMenu = () => {
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getFilterProducts = async () => {
+      const res = await axios.get(
+        `http://localhost:5000/api/get-products?category=${category}&price=${price}&search=${search}`
+      );
+      const data = await res.data;
+      dispatch(setProducts(data.data));
+    };
+    getFilterProducts();
+  }, [category, price, search]);
+
   return (
     <div className="w-[93vw] flex flex-col sm:flex-row justify-between items-center mx-auto my-10 gap-3 sm:gap-8">
       <div className="flex sm:w-[30%] w-full gap-3">

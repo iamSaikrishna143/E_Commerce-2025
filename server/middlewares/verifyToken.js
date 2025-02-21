@@ -14,12 +14,12 @@ const verifyToken = (req, res, next) => {
   try {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
       if (err) {
-        return res.status(400).json({
+        return res.status(401).json({
           message: "Invalid token",
           success: false,
         });
       }
-      req.id = user._id;
+      req.id = user.id;
       req.role = user.role;
       next();
     });

@@ -10,8 +10,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -20,6 +18,9 @@ import {
 } from "@/components/ui/sidebar";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import { setUserLogout } from "../../redux/slices/authSlice";
+import useToast from "../../hooks/use-toast";
 
 // Menu items.
 const items = [
@@ -52,6 +53,18 @@ const items = [
 
 const AppSidebar = () => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const { toast } = useToast();
+
+  const handleLogout = () => {
+    dispatch(setUserLogout());
+    toast({
+      title: "Logged Out Successfully",
+      description: "You have been logged out",
+      variant: "success",
+    });
+    window.location.href = "/admin/login";
+  };
   return (
     <Sidebar>
       <SidebarHeader>
@@ -79,7 +92,7 @@ const AppSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Button>Logout</Button>
+        <Button onClick={handleLogout}>Logout</Button>
       </SidebarFooter>
     </Sidebar>
   );

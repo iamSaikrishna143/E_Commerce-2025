@@ -31,7 +31,7 @@ const ProductCard = ({
         {/* <Link to={`/product/${image.id}`} className="inline-block">
           <Button>View Product</Button>
         </Link> */}
-        <LinkButton to={"/product"} text="View product" />
+        <LinkButton to={`/product/${name.split(" ").join("-")}`} text="View product" />
       </div>
     </div>
   );

@@ -18,49 +18,96 @@ import Orders from "./components/custom/Orders";
 import Analytics from "./components/custom/Analytics";
 import Settings from "./components/custom/Settings";
 import { Provider } from "react-redux";
-import {store} from "./redux/store";
+import { store } from "./redux/store";
+import MyOrder from "./pages/MyOrder";
+import { Toaster } from "./components/ui/toaster";
+import ProtectedRoute from "./components/custom/ProtectedRoute";
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <RootLayouts children={<Home />} />,
+      element: (
+        <ProtectedRoute>
+          <RootLayouts children={<Home />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/signup",
-      element: <RootLayouts children={<Signup />} />,
+      element: (
+        <ProtectedRoute>
+          <RootLayouts children={<Signup />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/login",
-      element: <RootLayouts children={<Login />} />,
+      element: (
+        <ProtectedRoute>
+          <RootLayouts children={<Login />} />
+        </ProtectedRoute>
+      ),
     },
     {
-      path: "/product",
+      path: "/product/:productName",
       element: <RootLayouts children={<Product />} />,
     },
     {
       path: "/checkout",
-      element: <RootLayouts children={<Checkout />} />,
+      element: (
+        <ProtectedRoute>
+          <RootLayouts children={<Checkout />} />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/orders",
+      element: (
+        <ProtectedRoute>
+          <RootLayouts children={<MyOrder />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/admin/login",
-      element: <RootLayouts children={<AdminLogin />} />,
+      element: (
+        // <ProtectedRoute>
+          <RootLayouts children={<AdminLogin />} />
+        // </ProtectedRoute>
+      ),
     },
     {
       path: "/admin/dashboard",
-      element: <AdminLayout children={<CreateProducts />} />,
+      element: (
+        <ProtectedRoute>
+          <AdminLayout children={<CreateProducts />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/admin/dashboard/all-products",
-      element: <AdminLayout children={<AllProducts />} />,
+      element: (
+        <ProtectedRoute>
+          <AdminLayout children={<AllProducts />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/admin/dashboard/orders",
-      element: <AdminLayout children={<Orders />} />,
+      element: (
+        <ProtectedRoute>
+          <AdminLayout children={<Orders />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/admin/dashboard/analytics",
-      element: <AdminLayout children={<Analytics />} />,
+      element: (
+        <ProtectedRoute>
+          <AdminLayout children={<Analytics />} />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/admin/dashboard/settings",
@@ -87,6 +134,7 @@ const App = () => {
     <>
       <ThemeProvider>
         <Provider store={store}>
+          <Toaster />
           <RouterProvider router={router} />
         </Provider>
       </ThemeProvider>

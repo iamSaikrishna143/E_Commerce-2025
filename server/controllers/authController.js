@@ -22,7 +22,7 @@ const signup = async (req, res) => {
       .json({ success: true, message: "User created successfully" });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -118,7 +118,7 @@ const adminLogin = async (req, res) => {
       success: true,
       token,
       message: "Admin logged in successfully",
-      admin: {
+      user: {
         id: admin._id,
         username: admin.username,
         role: admin.role,
